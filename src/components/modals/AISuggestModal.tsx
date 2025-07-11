@@ -25,25 +25,24 @@ export function AISuggestModal() {
     setSuggestions([]);
     setError(null);
     try {
-      const result = await suggestTasks({ topic });
-      if (result && result.tasks) {
-        setSuggestions(result.tasks);
-      } else {
-        throw new Error("Invalid response format from AI.");
-      }
+      // Temporarily disable AI feature
+      // const result = await suggestTasks({ topic });
+      // if (result && result.tasks) {
+      //   setSuggestions(result.tasks);
+      // } else {
+      //   throw new Error("Invalid response format from AI.");
+      // }
+      throw new Error("The AI service is temporarily unavailable. Please try again later.");
+
     } catch (err) {
       console.error('Failed to get AI suggestions:', err);
       let errorMessage = 'An unknown error occurred.';
       if (err instanceof Error) {
-        if (err.message.includes('503') || err.message.includes('overloaded')) {
-            errorMessage = "The AI service is currently busy. Please try again in a moment.";
-        } else {
-            errorMessage = "Could not fetch AI suggestions.";
-        }
+        errorMessage = err.message;
       }
       setError(errorMessage);
       toast({
-        title: 'Error',
+        title: 'Feature Unavailable',
         description: errorMessage,
         variant: 'destructive',
       });
