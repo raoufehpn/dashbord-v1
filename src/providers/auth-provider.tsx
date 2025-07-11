@@ -2,7 +2,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { User } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 
 // Mock user for preview mode
 const previewUser: User = {
@@ -25,8 +25,16 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(previewUser);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // In a real app, you'd fetch the user session here.
+    // For preview mode, we'll just set the mock user.
+    setUser(previewUser);
+    setLoading(false);
+  }, []);
+
 
   const logIn = async (email: string, pass: string) => {
     // This is a mock function for preview mode
