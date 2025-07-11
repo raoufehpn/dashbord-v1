@@ -97,7 +97,7 @@ export function TaskStatusChart() {
                   axisLine={false}
                   stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
-                  tick={{ textTransform: 'capitalize' }}
+                  tickFormatter={(value) => value.charAt(0).toUpperCase() + value.slice(1)}
                 />
                 <YAxis
                   tickLine={false}
