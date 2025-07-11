@@ -5,6 +5,6 @@
  * so that they can be served as API routes.
  */
 'use server';
-import '@/ai/dev';
+import '@/ai/flows/suggest-tasks-flow';
 import {nextJS} from '@genkit-ai/next';
 export const {GET, POST} = nextJS();
