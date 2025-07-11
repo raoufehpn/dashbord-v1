@@ -84,14 +84,14 @@ export function TaskFormModal() {
     };
 
     const handleAddTag = () => {
-        if (tagInput && !watchedTags.includes(tagInput)) {
-            form.setValue("tags", [...watchedTags, tagInput]);
+        if (tagInput && !(watchedTags ?? []).includes(tagInput)) {
+            form.setValue("tags", [...(watchedTags ?? []), tagInput]);
             setTagInput('');
         }
     };
 
     const handleRemoveTag = (tagToRemove: string) => {
-        form.setValue("tags", watchedTags.filter(tag => tag !== tagToRemove));
+        form.setValue("tags", (watchedTags ?? []).filter(tag => tag !== tagToRemove));
     };
 
     return (
@@ -208,7 +208,7 @@ export function TaskFormModal() {
                             <Button type="button" onClick={handleAddTag}>Add</Button>
                         </div>
                         <div className="flex flex-wrap gap-2 mt-2">
-                            {watchedTags.map(tag => (
+                            {(watchedTags ?? []).map(tag => (
                                 <Badge key={tag} variant="secondary">
                                     {tag}
                                     <button onClick={() => handleRemoveTag(tag)} className="ml-2 rounded-full hover:bg-destructive/20 p-0.5">
