@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -16,7 +17,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system" as Theme,
+  theme: "dark",
   setTheme: () => null,
 };
 
@@ -28,21 +29,19 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') {
-      return defaultTheme;
-    }
-    return (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  });
+  const [theme, setTheme] = useState<Theme>(defaultTheme);
 
   useEffect(() => {
-    if(typeof window === 'undefined') return;
+    const storedTheme = localStorage.getItem(storageKey) as Theme | null;
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, [storageKey]);
 
+  useEffect(() => {
     const root = window.document.documentElement;
-
     root.classList.remove("light", "dark");
     root.classList.add(theme);
-    
     localStorage.setItem(storageKey, theme);
   }, [theme, storageKey]);
 
