@@ -2,7 +2,16 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import type { User } from '@supabase/supabase-js';
+
+// Define the User type locally to remove the dependency on @supabase/supabase-js
+interface User {
+  id: string;
+  app_metadata: { [key: string]: any };
+  user_metadata: { [key: string]: any };
+  aud: string;
+  created_at: string;
+  email?: string;
+}
 
 // Mock user for preview mode
 const previewUser: User = {
