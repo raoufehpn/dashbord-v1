@@ -1,4 +1,5 @@
 
+
 "use client"
 
 import { WelcomeBanner } from "@/components/WelcomeBanner";
@@ -63,13 +64,13 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                 <div className="space-y-6">
+                     <div className="hidden lg:block">
+                        <WelcomeBanner />
+                    </div>
                     <TaskStatusChart />
                     <TasksList />
                 </div>
                 <div className="space-y-6">
-                    <div className="hidden lg:block">
-                        <WelcomeBanner />
-                    </div>
                     <DashboardStats />
                     <CategoryBreakdownChart />
                 </div>
