@@ -4,7 +4,7 @@
 import { useTasks } from "@/providers/tasks-provider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Circle, ListTodo } from "lucide-react";
+import { ArrowRight, Circle, ListTodo } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Priority } from "@/lib/types";
@@ -59,7 +59,7 @@ export function TasksList() {
                                         {task.dueDate && <p className="text-sm text-muted-foreground">Due: {format(parseISO(task.dueDate), 'MMM d')}</p>}
                                     </div>
                                 </div>
-                                <Badge variant={priorityVariant[task.priority]} className="capitalize h-6 shrink-0">{task.priority}</Badge>
+                                <Badge variant={priorityVariant[task.priority || 'low']} className="capitalize h-6 shrink-0">{task.priority || 'low'}</Badge>
                             </div>
                         ))}
                     </div>
